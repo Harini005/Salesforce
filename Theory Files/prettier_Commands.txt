@@ -1,0 +1,3 @@
+npm install --save -dev prettier
+npm install --global prettier prettier-plugin-apex
+prettier --write "./force-app/**/*.{trigger,cls}"

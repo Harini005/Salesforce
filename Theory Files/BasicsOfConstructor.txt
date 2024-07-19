@@ -1,0 +1,8 @@
+=> Constructor is the first thing which gets invoked when a class is initiated/called
+=> Constructor can be public/private
+=> By default System defines no parameter Constructor
+=> An Apexclass can have multiple constructors
+=> once multi parameter is created and there is no zero params constructor and user tries to call the no params constructor it will throw error
+
+
+=> ApaxClass : ConstructorExamples , ConstructorExamplesTest

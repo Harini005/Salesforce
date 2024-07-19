@@ -1,0 +1,11 @@
+git init                                -----       Initiates the Repository in the Selected folder
+git clone                               -----       Clones the existing git repository in the Selected folder
+git add *                               -----       Stages all the changed files 
+git add <fileName>                      -----       Stages Only the Specific fileName
+git commit -m "message"                 -----       Adds the commit message
+git push origin <branchName>            -----       Pushese the commited changes to the branch
+git status                              -----       Compares the branch changes against workSpace
+git config --global user.name "<name>"  -----       Configures the Name for git
+git config --global user.email "<email>"-----       Configures the Email for git
+git config --global http.sslVerify false
+git confug --system core.lengthpaths true
