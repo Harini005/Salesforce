@@ -1,0 +1,16 @@
+=> Singleton is used to optimize the server calls.
+=> It is used to minimize object instantiation for improved performance and to mitigate the impact of governor limits.
+=> Ensures a class has only one instance, and provide a global access to it.
+
+=================================================================================================================================
+=================================================================================================================================
+
+---------------------------------------------------To Develop Singleton Pattern-------------------------------------------------
+=> public property that needs to be accessed by developers
+=> private Constructor
+=> private instance of the class
+=> public static methods that a developer can refer to in the code.
+
+=> EX 
+ApexClass : RegionManagerUtility 
+TestClass : AccountTriggerHandlerTest

@@ -1,3 +1,4 @@
+/*SandBoxes , ScratchOrg*/
 sf project deploy start
 sf project deploy preview
 sf project retrieve start
@@ -7,5 +8,11 @@ sf project retrieve start --metadata ApexClass:ClassName --target-org <orgName>
 sf project deploy preview --metadata ApexClass:ClassName --target-org <orgName> 
 sf project retrieve preview --metadata ApexClass:ClassName --target-org <orgName> 
 echo y | sf project tracking reset
+
+/*Developer,Production*/
 sf org list
+sf org display
+sf org logout
+sf deploy metadata --metadata ApexClass:ClassName
+
 
