@@ -56,3 +56,25 @@ grant_type = urn:ietf:params:oauth:grant-type:jwt-bearer
 assertion = COMPLETE_JWT_ASSERTION (assertion token from the code)
 
 
+
+======================================================================================================================================================================================================================================================================
+
+JWT authorization can be done in 3 ways 
+=> Using Apex class (Custom Code) Ex: JWTACCessTokenProvider , JwtAssertionProvider
+=> Using Auth Namespace Jsw,Jwt,JWTBearerTokenExchange Class 
+=> Using NamedCredentials
+
+Steps for NamedCredential process :
+1.create Extrenal Credentials.
+2.select 
+Authentication protocol = Auth2.0 ,
+Authrntication protoType = JWT Bearer,
+Identity provider URl = Token Url
+signing certifcate = certificate from certificate and key management
+signing Algorith = RS256
+
+3.create Principal 
+4.create Named Credential
+5.Use Normal Http code to integrate with the server.
+
+
