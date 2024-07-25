@@ -1,6 +1,11 @@
 public with sharing class Dog extends Animal {
-  public Dog(String name, Integer age) {
+  String breed { get; private set; }
+  String color { get; private set; }
+
+  public Dog(String name, Integer age, String breed, String color) {
     super(name, age);
+    this.breed = breed;
+    this.color = color;
     System.debug(name);
     System.debug(age);
   }
