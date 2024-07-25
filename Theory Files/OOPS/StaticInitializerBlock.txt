@@ -1,0 +1,27 @@
+=>Static (methods, variables, and initialization code) have these characteristics.
+
+They’re associated with a class.
+They’re allowed only in outer classes.
+They’re initialized only when a class is loaded.
+
+
+=>Instance (methods, member variables, and initialization code) have these characteristics.
+
+They’re associated with a particular object.
+They have no definition modifier(public/private AccessModifiers).
+They’re created with every object instantiated from the class in which they’re declared.
+
+
+=>Local variables have these characteristics.
+
+They’re associated with the block of code in which they’re declared.
+They must be initialized before they’re used.
+
+======================================================================================================================================================================================================================================================================
+
+order of execution
+
+static variable
+static code block 
+initializer block 
+constructor
