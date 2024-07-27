@@ -4,5 +4,16 @@
     "**/bower_components": true,
     "**/.sfdx": true
   },
-  "vlocity.sfdxUsername": "harinigovindarajan005@all.com"
+  "vlocity.sfdxUsername": "All",
+  "salesforce.einsteinForDevelopers.enable": false,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#c3c3c5",
+    "icon.foreground": "#000000",
+    "symbolIcon.colorForeground": "#ff0000",
+    "icon.colorForeground": "#ff0000",
+    "activityBar.inactiveForeground": "#524747",
+    "statusBar.background" : "#1A1A1A",
+    "statusBar.foreground" : "#eaeaec"
+  },
+  "vlocity.salesforce.developerLogsVisibility": "all",
 }

@@ -1,0 +1,6 @@
+4 types of access Modifiers in Apex
+
+=> global - It is used globally within or outside the namespace (Used in class , method, variable) , scope - all
+=> pubic -  It is visible to the classes which are in the same nameSpace (Used in class , method, variable) , scope - all
+=> protected - only visible to the class which extends & inner Classes. scope - variables , methods
+=> private - visible only within the class 

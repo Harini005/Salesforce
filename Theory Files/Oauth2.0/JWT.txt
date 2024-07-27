@@ -1,0 +1,80 @@
+=> JWT = Json Web Token
+=> it performs both authenticate & authorize in more secured way.
+=> why it is more secured than other mechanisms ? It creates token by using private key which is provided by target system. 
+=> can use private key/ssl certificate to get the token.
+
+======================================================================================================================================================================================================================================================================
+
+1. Target system creates an SSL certificate using a private key.
+2. Generated certificate is given to the client
+3. A Connected app is created in the client side using the certificate.
+4. client sents the request to the target using consumer key.
+5. server verifies whether the private key is valid or not by checking the consumer key.
+6. It also checks whether user has access to the System or not.
+
+======================================================================================================================================================================================================================================================================
+
+JWT Structure :
+1.Header    -   These Contains the algorithm that will be used to sign the request {"alg" : "RS256" , "type": "JWT"} //type is optional while using in salesforce.
+2.Payload   -   These contains information about the user to authenticate {"iss"(Consumer Id),"aud"(Login Url of target System) ,"sub"(userName of the target System) : "exp"(expiration time of access token in unix)}
+3.Signature -   These Contains HMACSHA(base64urlencoded(Header).base64urlencoded(payload).signature(uses alg of rs256(privateKey)))
+
+======================================================================================================================================================================================================================================================================
+
+create private key:
+1.Install open SSL
+2. open cmd prompt -> paste -> openssl genpkey -des3 -algorithm RSA -pass pass:SomePassword -out server.pass.key -pkeyopt rsa_keygen_bits:2048
+3. Pass key file will gets created in selected folder. Using pass key we create key
+4. in terminal paste -> openssl rsa -passin pass:SomePassword -in server.pass.key -out server.key
+5. key will be Generated
+6. Using the key csr file will be Generated
+7. in terminal paste -> openssl req -new -key server.key -out server.csr
+8. openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+9. give all the necessary information to generate the certificate
+10.create connected app in server
+11.upload the certificate
+12.callback url will be : http://localhost:1717/OauthRedirect
+
+======================================================================================================================================================================================================================================================================
+
+How Jwt works:
+1.web app/mobile app sends the JWT request to API gateway as JWT issure or third party JWT issure.
+2.Then it verfies the payload & user has valid application access(Connected app).
+3. if everything is valid then it sends JWT token in response.
+4. with that response the application makes request to protected resource.
+5. It validates the payload and token and sends the access token.
+
+======================================================================================================================================================================================================================================================================
+
+Token endpoint :
+https://login.salesforce.com/services/oauth2/token - developer org
+https://test.salesforce.com/services/oauth2/token - SandBoxes
+
+content-type must be application/x-www-form-urlencoded
+body :
+grant_type = urn:ietf:params:oauth:grant-type:jwt-bearer
+assertion = COMPLETE_JWT_ASSERTION (assertion token from the code)
+
+
+
+======================================================================================================================================================================================================================================================================
+
+JWT authorization can be done in 3 ways 
+=> Using Apex class (Custom Code) Ex: JWTACCessTokenProvider , JwtAssertionProvider
+=> Using Auth Namespace Jsw,Jwt,JWTBearerTokenExchange Class 
+=> Using NamedCredentials
+
+Steps for NamedCredential process :
+1.create Extrenal Credentials.
+2.select 
+Authentication protocol = Auth2.0 ,
+Authrntication protoType = JWT Bearer,
+Identity provider URl = Token Url
+signing certifcate = certificate from certificate and key management
+signing Algorith = RS256
+
+3.create Principal 
+4.create Named Credential
+5.Use Normal Http code to integrate with the server.
+
+

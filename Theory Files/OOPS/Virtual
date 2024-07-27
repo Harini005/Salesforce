@@ -1,0 +1,13 @@
+=> virtual keyword is used to inherit or extend the class
+=> The Class which act as parent class should have virtual at the class level definition.
+    Syntax : public virtual without sharing class ClassName{}
+=> Methods also can have virtual in their signature
+    Syntax : public virtual <returnType> methodName{}
+=> If a method shouldn't get override by the child class the a method can be defined in static/non-static without virtual keyword.
+    Ex : Animal Class -> breath method 
+
+=> To implement the custom logic of the extended classe's method use override keyword in place of virtual in child class
+    Ex : Dog Class -> walk method
+
+=> Super: Super is a keyword which is used to access the Parent class methods and properties. Super can't be used in Static context
+        It supports non-static context.
