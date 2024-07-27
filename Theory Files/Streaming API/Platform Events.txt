@@ -34,3 +34,5 @@ response of the published looks like
         EventBus.publish(event , new PlatformEventResultHandler());
 
 => handle both success and failure in the single Apex class.
+=> To subscribe to the patform event use platorm event triggered flow
+
