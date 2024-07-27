@@ -3,7 +3,7 @@
 => setup -> Platform Events - > create Object & fields
 => only limited Data Tyes available in field creation
 => Can publish or Subscribe to the platform event
-=> use EventBus.deliver(event/List<Event>) to publih event
+=> use EventBus.publish(event/List<Event>) to publih event
 => create trigger to subscribe trigger/flow 
 => owner of the subscribed records would br Automated process user
 
@@ -25,3 +25,12 @@ response of the published looks like
 
 
 => Platform Events cannot be retrieved , can't have list views
+=> Use EventBus.EventPublishSuccessCallbac & EventBus.EventPublishFailureCallback interface to handle Success/failure of the platform Event
+=> pass callback as the second pmt of the dml EventBus.publish(event , new classInstance());
+  Ex: 
+        SAP_Account__e event = new SAP_Account__e();
+        event.AccountId__c = '001dM00000JipGnQAJ';
+        event.Name__c = 'Salesforce.com';
+        EventBus.publish(event , new PlatformEventResultHandler());
+
+=> handle both success and failure in the single Apex class.
