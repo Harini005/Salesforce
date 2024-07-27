@@ -1,0 +1,27 @@
+=> Platform event is an Event driven architecture
+=> it is a near real time service
+=> setup -> Platform Events - > create Object & fields
+=> only limited Data Tyes available in field creation
+=> Can publish or Subscribe to the platform event
+=> use EventBus.deliver(event/List<Event>) to publih event
+=> create trigger to subscribe trigger/flow 
+=> owner of the subscribed records would br Automated process user
+
+response of the published looks like 
+{
+    "data":{ 
+        "schema":"",
+        "payload":{
+            ------Fields----
+        },
+        "events" : {
+            "EventUuid" : "",
+            "replayId" : "",
+            "EventApiName" : ""
+        }
+    },
+    "channel" : "/events/<PEName>"
+}
+
+
+=> Platform Events cannot be retrieved , can't have list views
