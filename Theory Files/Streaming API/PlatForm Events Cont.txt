@@ -1,0 +1,212 @@
+=> platform events are of 2 types : standard and custom
+=> standard custom events are salesforce statndard events like BatchApexErrorEvent ,Login , logout etc...
+=> Custom platform events can be created in salesforce.
+=> Platform Event is an Integration Capability that uses Streaming API
+=> Platform Event is an Event-driven archiecture, it follows the publish/subscribe model (pub/sub) which reduces the number of point-to-point integrations.
+   required within tech stack reducing the need of an integration layer to connect salesforce with external systems.
+=> Platform Events exchange events data in a real-time/near real-time with the Salesforce platform and between Salesforce and external platform.
+
+
+Event-Driven Architecture:
+==========================
+
+Event Producer : An Event Producer creates an Event.
+Event Bus : The Event gets added onto the Event Bus(Channel), which operates as a queue , with a static chronological order, and executes each event one after the other.
+Event Consumer : Event Consumer Subscribes to an event. The moment that event gets put onto the event bus, the event consumer will be notified.
+
+This approach reduces the dependencies between the complex systems because the event consumer doesn't need to know about the event producer; instead the event consumer knows about the event record via the event bus.
+There is no one-to-one point/contact between event producer and Event consumer. Because of this it is more flexible.
+
+
+Defining Platform Event :
+==========================
+
+Setup -> Platform Event -> (ends with __e)
+
+publish behavour - when actually the system fires the event.
+    publish after commit :- to have the event message published after the transaction commits Sucessfully. If the transaction fails event rollbacks.
+    publish immediately :- to have the event message published when the publish call executes, doesn't matter whether transaction is successful or not.
+
+ReplayId : The Replay field value , which is populated by the system when the event is delievered to subscribers, refers to the position of the event in event stream.
+    Subscribers can store the replayId value and use it on resubscription.
+
+Event UUID : A  universally unique Identifier(UUID) that Identifies a platform event message. The system populates the Event UUID  field and user cannnot override it.
+
+
+Platform Event Considerations :
+=================================
+* always events ends with __e
+* cannot query platform events through SOQL/SOSL.
+* cannot use platform events in reports, listviews and search.
+* platform Events doesn't have an associated tab.
+* All Platform event fields are read-only by default.
+* only after Insert triggers are supported.
+* can access platform events through API  & declarations.
+* can control platform events through profiles and permissions.
+
+cutsom field types can create in platform Event:
+=================================================
+Text
+Text area (long)
+Number
+Date
+Date/Time
+Checkbox
+
+How to publish data from postMan :
+==================================
+
+postman -> Rest -> Sobjects -> put the object value as PLatform EVnet -> send
+
+url :POST  {INSTANCE_URL}/services/data/{version}/sobjects/PLATFORMEVENT__e
+Body : {
+            -----data------
+        }
+
+
+Publish platform Event from :
+=============================
+
+-> flows
+-> Apex
+-> API
+-> process Builer (deprecated)
+
+Publish Event with Flow :
+==================================
+
+-> use flow to publish event 
+-> can fire event from Record triggered , Autolaunched , Screen Flow etc..
+-> To fire event create record of the event. That will publish the event
+
+Publish Event Using Apex:
+=============================
+
+-> Use EventBus.publish(event/events) to publish Event.
+-> In TestClass to Test the functionality wrap EventBus.publish(event) around Test.startTest() and Test.stopTest()
+
+public class EventDemo{
+    public static void fireEvent(){
+        SAP_Account__e record = new SAP_Account__e();
+        record.AccountId__c = '';
+        record.Name__c = '';
+        EventBus.publish(record);
+    }
+}
+
+-> when an event is published. It will get queued in the Event Bus.
+
+Validate Platform Event:
+=========================
+
+=> Event Publishing is an asynchronous process and the immediate result returned in saveResult is the result of queueing the publish operation in Salesforce.
+
+Result of Asynchronous Platfrom Event:
+======================================
+=> Get the result of an EventBus.publish call through an Apex Publish callback that is being implemented. Without callback only intermediate querying result in the Database.saveResult of an EventBus will returned.
+=> After the publish operation completes and the final result is ready, the system returns a callback.
+
+the two interfaces which states the results are:
+1. EventBus.EventPublishSuccessCallback  ----> method onSuccess()
+2. EventBus.EventPublishFailureCallback  ----> method onFailure()
+
+EX: 
+public class EventDemo{
+    public static void fireEvent(){
+        SAP_Account__e record = new SAP_Account__e();
+        record.AccountId__c = '';
+        record.Name__c = '';
+        EventBus.publish(record , new PE_ResultHandler());
+    }
+}
+
+public without sharing class PE_ResultHandler implemets EventBus.EventPublishSuccessHandler , EventBus.EventPublishFailureCallback{
+    public void onSuccess(EventBus.SuccessResult result){
+        List<String> eventUUIDS = result.getEventUUIds();
+        ============= SOME CODE =========================
+    }
+
+    public void onSuccess(EventBus.SuccessResult result){
+        List<String> eventUUIDS = result.getEventUUIds();
+        ============= SOME CODE =========================
+    }
+}
+
+TestClass :
+    @IsTest
+    public class PE_ResultHandlerTest(){
+
+        @IsTest
+        static void failedTest(){
+            //given Data
+            EventBus.publish(record , callback);
+            Test.getEventBus.fail();
+        }
+
+         @IsTest
+        static void succeededTest(){
+            //given Data
+            Test.startTest();
+            EventBus.publish(record , callback);
+            Test.stopTest();
+
+                    (or)
+            Test.getEventBus.deliver();
+        }
+    }
+
+
+Invoke Publish CallBack:
+=========================
+    To have the system invoke the callback when the final publish result is available. Pass an instance of the callback class as the 2nd parameter in the EventBus.publish 
+ 
+Running User:
+=============
+    A publish callback runs under the automated process user. As a result , all the records that are created in a callback have their System fields such as createdBy & OwnerId set to Automated process user.
+
+
+Subscribe to the platform event :
+=================================
+-> Flow : Platform Triggered Flow
+-> Apex : In afterInsert of PE object Trigger.
+
+=> The trigger runs asynchronously in its own process. Synchronous limits apply to platform Event triggers.
+=> Trigger runs under Automated process entity.
+
+Ex:
+    trigger PETrigger on SAP_Account__e(afterInsert){
+        PETriggerHandler.onAfterInsert(Trigger.new);
+    }
+
+    public class PETriggerHandler{
+        public static void onAfterInsert(List<SAP_Account__e> newRecords){
+            for(SAP_Account__e record : newRecords){
+                //some logic
+            }
+        }
+    }
+
+
+
+Fire platform event using BatchApex :
+=======================================
+=> Batch Apex classes can fire platform events when encountring an error or exception.
+=> If the start , execute , finish methods of a batch apex job encounters an unhandled exception, a BatchApexErrorEvent platform Event fires.
+=> To Fire a platform Event , a batch class declaration must implement the Databas.RaisesPlaformEvent interface.
+
+EX: 
+    public class BatchClass implemets Database.Batchable<Sobject> , Database.RaisesPlaformEvent{
+        //implementation
+    }
+
+    trigger batchApexError on BatchApexErrorEvent(after insert){
+        //call Apex class
+    }
+
+    public class BatchApexErrorHandler(List<BatchApexErrorEvent> records){
+        Set<Id> asyncApexJobs = new Set<Id>();
+            for(BatchApexErrorEvent record : records){
+                asyncApexJobs.add(record.AsyncApexJobId);
+            }
+        Map<Id,AsyncApexJob> jobs = [SELECT Id,ApexClass.Name from AsyncApexJob where Id IN :asyncApexJobs];
+    }
