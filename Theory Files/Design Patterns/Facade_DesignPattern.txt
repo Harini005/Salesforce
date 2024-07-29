@@ -1,0 +1,60 @@
+=> Facade Design Pattern :
+=============================
+
+This is a Structure design pattern which hides the complexity of the system and provides the simple interface to the client. This pattern involves a class called a Facade which provides simplified methods required by clients and delegates its call to method of existing classes.
+
+Why Facade :
+--------------
+
+There may be many complex classes in the system. Calling its methods may be tedious and repeated process at many places because of many dependencies between them. So instead of using these methods from these classes again and again, we create a simple called Facade which utilizes methods from these complex classes in its implementation but provides a simple interface to the client.
+
+problem : lets say you have to draw circle,square and rectangle and you have three different class corresponding to these drawing methods.
+
+Solution : we will create a facade class which provides a simple interface to draw all these three shapes by hiding the underlying complexities from the class.
+
+EX: 
+public interface Shape{
+    void draw();
+}
+
+public class Rectangle implements Shape{
+    public void draw(){
+        System.debug('Rectangle:draw()');
+    }
+}
+
+public class Square implements Shape{
+    public void draw(){
+        System.debug('Square:draw()');
+    }
+}
+
+public class Circle implements Shape{
+    public void draw(){
+        System.debug('Circle:draw()');
+    }
+}
+
+public class ShapeFacade{
+    private Shape circle;
+    private Shape rectangle;
+    private Shape square;
+
+    public ShapeFacade(){
+        circle = new Circle();
+        rectangle = new Rectangle();
+        square = new Square();
+    }
+
+    public void drawCircle(){
+        circle.draw();
+    }
+
+    public void drawRectangle(){
+        rectangle.draw();
+    }
+
+    public void drawsquare(){
+        square.draw();
+    }
+}
