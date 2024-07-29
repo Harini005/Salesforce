@@ -1,1 +1,2 @@
 => Builder Pattern 
+The builder pattern is a creational pattern – it helps you to instantiate objects in a particular way. This pattern allows you to construct complicated objects step by step. Builders help to populate immutable private variables at construction without multiple position-based constructor arguments.
