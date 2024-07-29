@@ -1,0 +1,15 @@
+Sample code:
+===============
+
+Type t = Type.forName('Account');
+System.debug(t); //Account
+
+//To create new Instance
+Sobject account = (Sobject) t.newInstance(); //returns object type cast it into Sobject
+System.debug(account); //Account:{}
+
+String name = t.getName();
+System.debug(name); //Account
+
+Same with the class - it returns the Class of Sobjects , primitives etc...
+t.newInstance() only works when class don't have custom or parameterized constructor
