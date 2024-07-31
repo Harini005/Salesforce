@@ -14,6 +14,12 @@ ctrl+shift+]        -> expanding the block
 ctrl+shift+up       -> pushes the file to one location back in the editor
 ctrl+shift+down     -> pushes the file to one location front in the editor
 ctrl+shift+k        -> deletes a line 
+ctrl+shift+w        -> closes the vs code
+ctrl+shift+M        -> opens the vs code terminal problems tab
+ctrl+shift+y        -> opens the vs code terminal output tab
+ctrl+shift+L        -> multicursor with the selected text
+
+
 
 ctrl+w              -> closes the current window
 ctrl+0              -> opens sidebar
@@ -23,6 +29,14 @@ ctrl+B              -> closes the sidebraw
 ctrl+k ctrl+L       -> To open and close the block
 ctrl+up             -> Switches the tab to the file before the file in the editor
 ctrl+down           -> Switches the tab to the file after the file in the editor
+ctrl+g              -> goes to the mentioned line
+ctrl+f              -> searches for the given keyword
+ctrl+h              -> find and replace
+ctrl+j              -> opens/closes the below terminal
+ctrl+2              -> splits and opens the new terminal
+ctrl+i              -> gives the suggestions
+ctrl+r              -> shows the list of folders present in the system
+ctrl+q              -> shows the list of vs code top bar 
 
 
 
@@ -34,4 +48,9 @@ shift+home          -> To select whole line from end
 shift+alt+up        -> duplicates the line at the top of copied line
 shift+alt+down      -> duplicates the line at the bottom of copied line
 shift+alt+f         -> formats the document
+
+
+
+alt+up              -> moves the selected lines to the top 
+alt+down            -> moves the selected lines to the bottom 
 
