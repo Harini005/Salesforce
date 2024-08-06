@@ -1,0 +1,21 @@
+***Schema.describeFieldResult***
+====================================
+
+=> getByteLength() : for variable length fields , returns the maximum size of the field.
+    EX:  Integer byteLength = Account.Description.getDescribe().getByteLength();
+    Note : In most of the cases only fields which are text/textarea/picklist. got 0 in number cases.
+
+=> getCalculatedFormula() : returns the formula of the field. Gives the original formula.
+    Ex: String res = Account.<FormulaField>.getDescribe().getCalculatedFormula();
+        
+=> getController() : returns the token of Controlling field.
+    Ex : Schema.SobjectField res = Opportunity.Stage_Reason__c.getDescribe().getController();
+
+=> getDefaultVaule() : returns the default value of the field.
+    Ex: Account.Description.getDescribe().getDefaultValue();
+
+=> getDefaultValueFormula() : returns the default value specifid for the field if a formula is not used.
+    Ex: String res = Account.Amount.getDescribe().getDefaultValueFormula();
+
+=> getDigits() : Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.
+    Ex: Integer res = Account.NumberOfEmployee.getDescribe().getDigits();
