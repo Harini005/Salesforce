@@ -1,0 +1,8 @@
+=> Can describe Sobjects either by using tokens or describeSobjects schema methods
+=> Token : A lightweight, serializable reference to an Sobject or a field that is validated at compile time. This is used for token describes.
+=> describeSonject : A method in the schema class that performs describe of one or more sobject types.
+=> describe result : an object of type Schema.DescribeSobjectResult that contains all the describe properties for the sobject or field.
+=> DescribeResultObjects are not serializable , and are validated at the run time. This result object is returned when performing describe , using either the sobject token or the describeSobjects method.
+=> All schema methods are static 
+** getGlobalDescribe() -> returns a map of Sobject Name(Key) & Sobject token(Value) for both standard and custom objects defined in org.
+=> describeDataCategoryGroups(sobjectName) -> returns a list of the category groups associated with the specified object. 
