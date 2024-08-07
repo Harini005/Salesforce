@@ -12,10 +12,47 @@
     Ex : Schema.SobjectField res = Opportunity.Stage_Reason__c.getDescribe().getController();
 
 => getDefaultVaule() : returns the default value of the field.
-    Ex: Account.Description.getDescribe().getDefaultValue();
+    Ex: Object res = Account.Description.getDescribe().getDefaultValue();
 
 => getDefaultValueFormula() : returns the default value specifid for the field if a formula is not used.
     Ex: String res = Account.Amount.getDescribe().getDefaultValueFormula();
 
 => getDigits() : Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.
     Ex: Integer res = Account.NumberOfEmployee.getDescribe().getDigits();
+
+=> getInlineHelpText() : returns the content of field-level help text.
+    Ex: String res = Account.Description.getDescribe().getInlineHelpText();
+
+=> getLabel() : returns the label of the field.
+    Ex: String res = Account.Name.getDescribe().getLabel();
+
+=> getName() : returns the Name of the field.
+    Ex: String res = Account.Description.getDescribe().getName();
+
+=> getLocaleName() : Similar to the Name. If the field is the part of the current Namespace then Namespace is Omitted.
+    Ex: String res = Account.Name.getDescribe().getLocaleName();
+
+=>getPicklistValues() : returns the list of Schema.picklistEntry for both picklist and multipicklist.
+    EX: List<Schema.PicklistEntry> pickListValues = Account.Industry.getDescribe().getPickListValues();
+    
+    Methods in Schema.PicklistEntry :
+    ----------------------------------
+    1.getLabel() : returns the label of the picklist value.
+    2.getName() : returns the Name of the Pcklist Value.
+    3.isActive() : whether the value is active or not.
+    4.isDefaultValue() : whether the value is default or not.
+
+=> getPrecision() : returns the sum of digits & Decimal Points
+    Ex: Integer res = Account.Stock_Value__c.getDescribe().getPrecision();
+
+=> getRelationShipName() : returns the Name of the relationship in String format.
+    Ex: String res = Contact.AccountId.getDescribe().getRelationShipName(); //Account
+        String res = Contact.Parner__c.getDescribe().getRealtionShipName(); //Parter__r
+
+=> getRealtionShipOrder() : Returns 0 if the field is the primary relationship field or 1 if the field is the secondary relationship field.
+=> getReferenceTargetField() : Returns the name of the custom field on the parent standard or custom object whose values are matched against the values of the child external object's indirect lookup relationship field. The match is done to determine which records are related to each other.
+=> getReferenceTo() : Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.
+=> getScale() : returns the value after the point in Integer format.
+    Ex: Integer res = Account.stock_Value__c.getDescribe().getScale();
+
+=> getSoapType() : returns one of the soapType enum values :
