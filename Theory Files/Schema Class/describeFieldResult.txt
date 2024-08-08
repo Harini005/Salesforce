@@ -55,4 +55,47 @@
 => getScale() : returns the value after the point in Integer format.
     Ex: Integer res = Account.stock_Value__c.getDescribe().getScale();
 
-=> getSoapType() : returns one of the soapType enum values :
+=> getSoapType() : 
+    returns one of the soapType enum values :
+        anytype(String, Id, Double, Boolean, Integer, Date, DateTime),
+        base64 binary, 
+        Boolean,
+        Date, 
+        DateTime,
+        Double,
+        Id,
+        Integer,
+        String,
+        Time
+    Ex: Schema.SoapType = Account.Industry.getDescribe().getSoapType(); //String
+
+=> getSobjectField() : returns the token of the field.
+    Ex: Schema.SobjectField fieldToken = Account.Industry.getDescribe().getSobjectField();
+
+=> getSobjectType() : returns the salesforce object Type from which the field originates.
+    Ex : Schema.SobjectType objectName = Account.Industry.getDescribe().getSobjectType();
+
+=> isAccessible() : returns true if the current user can see the field.
+    Ex : Boolean fieldAccessable = Account.Industry.getDescribe().isAccessible();
+
+=> getType() : returns the displayType Enum, depending on the type of the field.
+    Ex : Map<String,Schema.SobjectField> fieldMap = Schema.SobjectType.Account.fields.getMap() / Account.SobjectType.getDescribe().fields.getMap();
+    for(Schema.SobjectField field : fieldMap){
+        System.debug(field.getDescribe().getType());
+    }
+
+=> isAIPredictionField() : returns true if current field is enabled for to display AI prediction.
+    Ex : Boolean resp = Account.Industry.getDescribe().isAIPredictionField();
+
+=> isAutoNumber() : returns true if the field is AutoNumber
+
+=> isCalculated() : returns true if  the field is custom formula field
+=> isCascadeDelete() : returns true if the child object is deleted when parent object is deleted . false otherwise.
+    Boolean resp = Error_Log__c.Account__c.getDescribe().isCascadeDelete();
+
+=> isCaseSensitive() : return true if on field unique & case sensitive is selected or returns true if the field is case sensitive
+
+
+
+
+
