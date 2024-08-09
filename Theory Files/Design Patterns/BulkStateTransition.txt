@@ -1,0 +1,1 @@
+This is same as Bulkifying the logic in Apex like adding all the records to the list and insert list at once.

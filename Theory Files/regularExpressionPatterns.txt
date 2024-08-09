@@ -1,0 +1,9 @@
+Purpose of Regex :
+====================
+    Regex is used to find the patterns in the text.
+    
+=> Square brackets :
+    The easiest regular expressions to understand are those that simply look for a character-to-character match between the regex pattern and the target string, like:
+    Ex : 
+    String : The cat was cut when it ran under the car. 
+    regex : ca[rt];

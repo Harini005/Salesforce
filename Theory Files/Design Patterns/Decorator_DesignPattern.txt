@@ -1,0 +1,11 @@
+=> Decorator Pattern :
+==========================
+
+It attempts to solve the issue where you need temporary fields for processing(typically in Visualforce/LWC/Aura/APex) but do not need to add these fields to the Sobject.
+
+Common uses for this pattern include:
+======================================
+
+1. Selection Checkbox - a list of records that the user selects and applies behaviour to; the selection checkbox is not saved.
+2. Calculated fields - a complex read-only value cannot be easily done in formula field (e.g. calculation of a check digit)
+3. wrapper class - when we wanted to store the data from the object to temporarily in the class.

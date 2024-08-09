@@ -1,0 +1,106 @@
+=> Can describe Sobjects either by using tokens or describeSobjects schema methods
+=> Token : A lightweight, serializable reference to an Sobject or a field that is validated at compile time. This is used for token describes.
+=> describeSonject : A method in the schema class that performs describe of one or more sobject types.
+=> describe result : an object of type Schema.DescribeSobjectResult that contains all the describe properties for the sobject or field.
+=> DescribeResultObjects are not serializable , and are validated at the run time. This result object is returned when performing describe , using either the sobject token or the describeSobjects method.
+=> All schema methods are static 
+** getGlobalDescribe() -> returns a map of Sobject Name(Key) & Sobject token(Value) for both standard and custom objects defined in org.
+=> describeDataCategoryGroups(sobjectName) -> returns a list of the category groups associated with the specified object.
+
+
+Schema.SobjectField :
+======================
+=> To refer the Object Field use Schema.SobjectField
+=> To Fetch the properties of an object & fields
+
+
+***SobjectType***
+------------------
+=> getDescribe() : gives the description about the object/field.
+Ex : Schema.describeSobjectResult objectsInfo = Account.SobjectType.getDescribe();
+
+=> getDescribe(Object options) : the pmt describe whether all child relationShip present or not
+   Three options availble :
+   1.sobjectDescriptionOption.FULL      : load all the child relationships 
+   2.sobjectDescriptionOption.DEFERRED  : don't load the child
+   3.sobjectDescriptionOption.DEFAULT   : load based on api version
+
+
+
+***DescribeSobjectResult***
+-----------------------------
+
+=> fields : To get the map of fields for the object.
+Ex: Map<String,Schema.SobjectField> fieldMap = Account.SobjectType.fields.getMap();
+                                or
+    Map<String,Schema.SobjectField> fieldMap = Schema.getGlobalDescribe().get('Account').getDescribe().fields.getMap();
+                                or
+    Map<String,Schema.SobjectField> fieldMap = Schema.SobjectType.Account.fields.getMap();
+
+=> fieldSet : To get the fieldSets present in the object.
+Map<String,Schema.Fieldset> fieldSetMap = Account.SobjectType.getDecribe().fieldSets.getMap();
+
+=> getAsscociateParentEntity : returns the parent of object.
+=> getAssociateEntityType : returns the type of object.
+
+Ex: Schema.describeSobjectResult result = AccountHistory.SobjectType.getDescribe();
+    System.debug(result.getAsscociateParentEntity()); /* o/p : Account */
+    System.debug(Schema.getAssociateEntityType()); /* o/p : History */
+
+=> getChildRelationShips() : returns the list of child object.
+   Schema.describeSobjectResult result = Account.SobjectType.getDescribe(); 
+   List<Schema.childRelationShip> childRelationShips = result.getChildRelationShips();
+   for(Schema.ChildRelationShip entity : childRelationShips){
+        System.debug(entity);
+    }
+
+=> getKeyPrefix() : gets the code of the object.
+   Schema.describeSobjectResult result = Account.SobjectType.getDescribe();
+   Map<String,Object> fieldDetails = new Map<String,Object>();
+   fieldDetails.put('Key Prefix' , result.getKeyPrefix());
+   fieldDetails.put('Createable' , result.isCreateable());
+   fieldDetails.put('Updateable' , result.isUpdateable());
+   fieldDetails.put('Deleteable' , result.isDeleteable());
+   fieldDetails.put('UnDeleteable' , result.isUndeleteable());
+   fieldDetails.put('Label' , result.getLabel);
+   fieldDetails.put('Plural Label' , result.getLabelPlural());
+   fieldDetails.put('Name' , result.getName());
+   fieldDetails.put('Local Name' , result.getLocalName());
+
+Note : getLocalName() is similar to getName() method. However, if the Object is part of the current namespace, the Namespace portion is omitted.
+
+=> getRecordTypeInfos() : Returns a list of record type supported by the object. Current user can see it in the list without having permissions to that RecordType.
+    List<Schema.RecordTypeInfo> recordTypes = Account.SobjectType.getDescribe().getRecordTypeInfos();
+
+=> getRecordTypeInfosByDeveloperName() : returns map of recordType developer Name and RecordType details.
+    Map<String,Schema.RecordTYpeInfosByDeveloperName> recordTypesData = Account.SobjectType.getDescribe().getRecordTypeInfosByDeveloperName();
+
+    Methods inside Schema.RecordType:
+    ------------------------------------
+    1. getName() : Returns the Name of the RecordType 
+    2. getDeveloperName() : Returns the developer Name of the RecordType
+    3.isActive() : Returns true if this record type is active, false otherwise.
+    4.isDefaultRecordTypeMapping() : Returns true if this is the default record type for the user, false otherwise.
+    5.isAvailable() : Returns true if this record type is available to the current user, false otherwise. Use this method to display a list of available record types to the user when he or she is creating a new record.
+    6.getRecordTypeId() : Returns the RecordTypeId.
+    7.isMaster() : Returns whether it is master or not.
+
+=> getRecordTypeInfosByName() : returns map of recordType Name and RecordType Details.
+    Map<String,Schema.RecordTypeInfo> recordTypeDetails = Schema.SobjectType.Account.getRecordTypeInfosByName();
+
+=> getSobjectDescribeOption() : returns the effective describe option used by the system for sobject.
+    Schema.SobjectDescribeOptions :
+        valid values are :
+        1.SobjectdEscribeOption.FULL        : load all the elements describe including child relationships.
+        2.SobjectDEscribeOption.DEFERRED    : don't load the child relationships
+        3.SobjectDescribeOption.DEFAULT     : loads according to the API version.
+Ex : schema.SobjectDescribeOption option = Schema.SobjectType.Account.getSobjectDescribeOption();
+
+=> getSobjectType() : returns the Sobject Type.
+    Ex : Schema.SobjectType = Account.getSobjectType();
+
+Note :
+isCreateable : current user can create obj or not
+isAccessiable : Current User can see the object or not.
+Schema is in System Namespace.
+JSON is in System Namespace.

@@ -1,0 +1,5 @@
+The  Strategy Patter (aka the policy pattern) attempts to solve the issue where you need to provide multiple solutions for the same problem so that one can be selected at runtime.
+
+1. An Interface which will have one or more methods.
+2. At least 1 or more class(es) which will implement that interface and it's methods. we can also say as Concrete Strategy class.
+3. One class which will be responsibe to call the Concrete Strategy methods at run time we can also say that this is the context class. This class will not implement the interface.  

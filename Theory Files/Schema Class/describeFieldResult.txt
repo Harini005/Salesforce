@@ -1,0 +1,101 @@
+***Schema.describeFieldResult***
+====================================
+
+=> getByteLength() : for variable length fields , returns the maximum size of the field.
+    EX:  Integer byteLength = Account.Description.getDescribe().getByteLength();
+    Note : In most of the cases only fields which are text/textarea/picklist. got 0 in number cases.
+
+=> getCalculatedFormula() : returns the formula of the field. Gives the original formula.
+    Ex: String res = Account.<FormulaField>.getDescribe().getCalculatedFormula();
+        
+=> getController() : returns the token of Controlling field.
+    Ex : Schema.SobjectField res = Opportunity.Stage_Reason__c.getDescribe().getController();
+
+=> getDefaultVaule() : returns the default value of the field.
+    Ex: Object res = Account.Description.getDescribe().getDefaultValue();
+
+=> getDefaultValueFormula() : returns the default value specifid for the field if a formula is not used.
+    Ex: String res = Account.Amount.getDescribe().getDefaultValueFormula();
+
+=> getDigits() : Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.
+    Ex: Integer res = Account.NumberOfEmployee.getDescribe().getDigits();
+
+=> getInlineHelpText() : returns the content of field-level help text.
+    Ex: String res = Account.Description.getDescribe().getInlineHelpText();
+
+=> getLabel() : returns the label of the field.
+    Ex: String res = Account.Name.getDescribe().getLabel();
+
+=> getName() : returns the Name of the field.
+    Ex: String res = Account.Description.getDescribe().getName();
+
+=> getLocaleName() : Similar to the Name. If the field is the part of the current Namespace then Namespace is Omitted.
+    Ex: String res = Account.Name.getDescribe().getLocaleName();
+
+=>getPicklistValues() : returns the list of Schema.picklistEntry for both picklist and multipicklist.
+    EX: List<Schema.PicklistEntry> pickListValues = Account.Industry.getDescribe().getPickListValues();
+    
+    Methods in Schema.PicklistEntry :
+    ----------------------------------
+    1.getLabel() : returns the label of the picklist value.
+    2.getName() : returns the Name of the Pcklist Value.
+    3.isActive() : whether the value is active or not.
+    4.isDefaultValue() : whether the value is default or not.
+
+=> getPrecision() : returns the sum of digits & Decimal Points
+    Ex: Integer res = Account.Stock_Value__c.getDescribe().getPrecision();
+
+=> getRelationShipName() : returns the Name of the relationship in String format.
+    Ex: String res = Contact.AccountId.getDescribe().getRelationShipName(); //Account
+        String res = Contact.Parner__c.getDescribe().getRealtionShipName(); //Parter__r
+
+=> getRealtionShipOrder() : Returns 0 if the field is the primary relationship field or 1 if the field is the secondary relationship field.
+=> getReferenceTargetField() : Returns the name of the custom field on the parent standard or custom object whose values are matched against the values of the child external object's indirect lookup relationship field. The match is done to determine which records are related to each other.
+=> getReferenceTo() : Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.
+=> getScale() : returns the value after the point in Integer format.
+    Ex: Integer res = Account.stock_Value__c.getDescribe().getScale();
+
+=> getSoapType() : 
+    returns one of the soapType enum values :
+        anytype(String, Id, Double, Boolean, Integer, Date, DateTime),
+        base64 binary, 
+        Boolean,
+        Date, 
+        DateTime,
+        Double,
+        Id,
+        Integer,
+        String,
+        Time
+    Ex: Schema.SoapType = Account.Industry.getDescribe().getSoapType(); //String
+
+=> getSobjectField() : returns the token of the field.
+    Ex: Schema.SobjectField fieldToken = Account.Industry.getDescribe().getSobjectField();
+
+=> getSobjectType() : returns the salesforce object Type from which the field originates.
+    Ex : Schema.SobjectType objectName = Account.Industry.getDescribe().getSobjectType();
+
+=> isAccessible() : returns true if the current user can see the field.
+    Ex : Boolean fieldAccessable = Account.Industry.getDescribe().isAccessible();
+
+=> getType() : returns the displayType Enum, depending on the type of the field.
+    Ex : Map<String,Schema.SobjectField> fieldMap = Schema.SobjectType.Account.fields.getMap() / Account.SobjectType.getDescribe().fields.getMap();
+    for(Schema.SobjectField field : fieldMap){
+        System.debug(field.getDescribe().getType());
+    }
+
+=> isAIPredictionField() : returns true if current field is enabled for to display AI prediction.
+    Ex : Boolean resp = Account.Industry.getDescribe().isAIPredictionField();
+
+=> isAutoNumber() : returns true if the field is AutoNumber
+
+=> isCalculated() : returns true if  the field is custom formula field
+=> isCascadeDelete() : returns true if the child object is deleted when parent object is deleted . false otherwise.
+    Boolean resp = Error_Log__c.Account__c.getDescribe().isCascadeDelete();
+
+=> isCaseSensitive() : return true if on field unique & case sensitive is selected or returns true if the field is case sensitive
+
+
+
+
+
