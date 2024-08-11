@@ -93,8 +93,31 @@
 => isCascadeDelete() : returns true if the child object is deleted when parent object is deleted . false otherwise.
     Boolean resp = Error_Log__c.Account__c.getDescribe().isCascadeDelete();
 
-=> isCaseSensitive() : return true if on field unique & case sensitive is selected or returns true if the field is case sensitive
+=> isCaseSensitive() : return true if on field unique & case sensitive is selected or returns true if the field is case sensitive.
+    Boolean res = Account.Name.getDescribe().isCaseSensitive();
 
+=> isCreateable() : returns true if the current field can be created by current user.
+    Boolean : Account.Id.getDescribe().isCreateable();
+
+=>isCustom() : returns true if a field is custom.
+    Boolean result = Account.Id.getDescribe().isCustom();
+
+=>isDefaultedOnCreate() : returns true if the field receives a default value on create . false otherwise.
+    Boolean result : Account.Indutsry.getDescribe().isDefaultOnCreate();
+
+=> isDependentPicklist() : rteurns true if the picklist is dependent picklist. false otherwise.
+    
+=>isEncrypted() : returns true if the field is Encrypted with shield platform Encryption , false otherwise .
+
+=> isExternalId() : returns true if the field is External Id , false otherwise.
+
+=> isFilterable() : returns true if the field can be used as a part of the filter criteria of a where stmt , else false
+    Note : TextArea fields can't be used to filter.
+
+    Ex : Boolean result = Account.Description.getDescribe().isFilterable(); //false
+    Ex : Boolean result = Account.Id.getDescribe().isFilterable(); //true
+
+=> 
 
 
 
