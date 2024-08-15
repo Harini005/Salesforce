@@ -1,0 +1,19 @@
+=> once a lead created in salesforce , It can be converted to Account , Contact , Opportunity(Optional)
+=> Account, Contact , Opportunity can be chosen as new or existng records.
+=> Lead's COmpany will become Account & Lead First Name . LastName is used for contact , Opportunity Name is like 'companyName-some desp'
+=> once the lead is converted, It is not searchable unless View & Edit converted lead permission is assigned.
+
+How to add permission to view/Edit Converted Lead :
+======================================================
+
+1. Create Permission Set
+2. App Permissions -> sales -> view/Edit Converted Lead.
+3.assign the permission set to user/profile.
+
+
+How to query Account,Contact,Opportunity which are converted from lead
+=======================================================================
+Lead record = [SELECT Id, Name , ConvertedAccountId , convertedcontactid, convertedopportunityId from Lead];
+
+
+Lead scoring App :  https://appexchange.salesforce.com/appxListingDetail?listingId=a0N300000024tT3EAI
