@@ -1,0 +1,36 @@
+=> Account is a company/organization.
+=> Contact is the person who wroks in the company.
+=> Opportunity is the company's interest to do the project with the salesforce organization.
+
+Ex : A company named ABC(Account) is interested in introducing an experience site & the salesforce person can create an opportunity for that and give quotations etc for that.
+
+stages in the Opportunity : It gives the clear picture where the opportunity is standing.
+different stages have the different probabilities.
+initially an opportunity will be in prospecting stage with 10%
+that opportunity can be finally either closed won or closed lost.
+closed won represents 100% probability & closed Lost represents 0% probability.
+
+Opportunity RecordType & Sales Process :
+------------------------------------------
+To create recordType in Opportunity. sales process is needed.
+through record Type we can control pagelayout.
+To control picklist values sales process are used 
+
+
+Opportunity Path :
+path visible on Opportunity.
+
+custom path can be created
+Home -> setup -> path settings -> Enable & create Path.
+can additionally add fields which needs to be shown on the stage below the path 
+Some guidance for the user
+
+can create this picklist for any object which has picklist value.
+
+
+Opportunity Contact Role :
+it links Opportunity & contact.
+An Account can have multiple contacts, using Opportunity Contact role particular contacts can be associated to the Opportunity whom owner/puser from salesforce can connect with them related to any queries or for the further information.
+
+the role values are predefined. To change the values or add values 
+Set up -> Contact for Opportunities -> add/ change -> save.
