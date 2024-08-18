@@ -17,3 +17,27 @@ Lead record = [SELECT Id, Name , ConvertedAccountId , convertedcontactid, conver
 
 
 Lead scoring App :  https://appexchange.salesforce.com/appxListingDetail?listingId=a0N300000024tT3EAI
+
+Lead might generate from Campaigns and directly from the company.
+when sales rep think that lead will be converted to the potential customer then sales rep converts that lead to Account,Contact and Opportunity.
+Account record Type will be Business Account because COntact will be created on Converting. For person Account Contact won't be available. So Account record Type always will be Business Account.
+
+To Add Custom Fields on Lead Conersion :
+========================================
+create a Custom field on Lead -> In Fields & RelationShip Section -> click on Map Fields on Lead -> select Account/Contact/Opportunity fields against the created Field to map the lead value into that Object on conversion.
+it maps on custom field on Lead to custom field on other objects.
+
+Record Type :
+==============
+To create recordType on opportunity -> sales process.
+To create recordType on case -> support process.
+To create recordType on Lead -> lead process.
+
+custom object can also have status path.
+
+Lead Assignment :
+setup -> Lead Assignment rules -> New -> create criteria.
+
+Lead Auto Response : 
+setUp -> Lead Auto Response Rules -> New -> fill the details -> Save.
+
