@@ -64,4 +64,44 @@ public with sharing class AccountTriggerHandler {
     
     
   }
+  
+  //Send Email to Owner when Annual Revenue crosses 50k within 30days.
+  public static void sendEmailToOwner(){
+    List<Account> accounts = (List<Account>) Trigger.new;
+    Map<Id,Account> newMap = (Map<Id,Account>) Trigger.newMap;
+    Map<Id,Account> oldMap = (Map<Id,Account>) Trigger.oldMap;
+    List<Messaging.SingleEmailMessage> emailsToOwner = new List<Messaging.SingleEmailMessage>();
+    List<AccountHistory> accountHistories = [SELECT createdDate,AccountId from AccountHistory where AccountId IN :accounts AND Field = 'AnnualRevenue' order By createdDate];
+    Map<Id,List<AccountHistory>> accountIdToHistory = new Map<Id,List<AccountHistory>>();
+    for(AccountHistory accountHistory : accountHistories){
+      if(!accountIdToHistory.containsKey(accountHistory.AccountId)){
+        accountIdToHistory.put(accountHistory.AccountId , new List<AccountHistory>());
+      }
+      accountIdToHistory.get(accountHistory.AccountId).add(accountHistory);
+    }
+    for(Account account : [SELECT Id,AnnualRevenue,Owner.Email from Account where Id In :accounts]){
+      if(account.AnnualRevenue > 50000 && newMap.get(account.Id).AnnualRevenue != oldMap.get(account.Id).AnnualRevenue){
+        if(!accountIdToHistory.containsKey(account.Id)){
+          emailsToOwner.add(emailContent(account.OwnerId));
+        }
+        else{
+          Date startDay = accountIdToHistory.get(account.Id)[0].createdDate.date();
+          Date endDay = accountIdToHistory.get(account.Id)[accountIdToHistory.get(account.Id).size()-1].createdDate.date();
+          if(startDay.daysBetween(endDay) < 30){
+            emailsToOwner.add(emailContent(account.owner.Email));
+          }
+        }
+      }
+    }
+    
+    Messaging.SendEmailResult[] results = Messaging.sendEmail(emailsToOwner);
+  }
+  
+  public static Messaging.SingleEmailMessage emailContent(String OwnerEmail){
+    Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+    email.setSubject('Annual Revenue crossed 50K');
+    email.setPlainTextBody('Dear Owner!!! your company\'s Annual Revenue crossed 50K within 30 days. ' );
+    email.setToAddresses(new List<String>{OwnerEmail});
+    return email;
+  }
 }
