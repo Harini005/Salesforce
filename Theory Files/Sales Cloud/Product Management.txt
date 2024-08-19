@@ -1,0 +1,57 @@
+Product Master :
+==================
+-> Master Table mantaining Product and corresonding price is called product master.
+
+Product Master -> Product & PriceBook
+
+Product : An item or commodity which is available for sell is called product.
+setup -> App Launcher -> Product -> new -> fill details -> save 
+
+product fields:
+Product name , product code , Product currency , Product description , Active , product family (Default - none)
+
+
+PriceBook :
+============
+Pricing strategy to position a single Product and multiple price range.
+In Salesforce it is createed with PriceBook Name, Description , Active & standard Price Book.
+
+PriceBook Entry :
+==================
+It is the Junction Object of Product and priceBook Entry.
+It has the Price (Amount) for the corresonding product and the PriceBook.
+Defines which product & pricebook And it's list price.
+Note : Every Product should have standard price and different Price based on price book.
+
+ways to add the priceBook :
+============================
+
+Product -> PriceBooks -> Add Standard PriceBook -> standardPriceBook Provided By Salesforce -> add price -> save
+after adding Standard priceBook the button changes to the Add PriceBook.
+Standard Price Book can be added once.
+
+Add to PriceBook -> click & form opens -> Use Standard PriceBook (Whatever Changes happens to the Standard that will reflect here).
+Price should be same as standardPriceBook price for the ones which are selected to use standard PriceBook.
+
+                                            (or)
+
+Price Book -> Related List -> priceBoo Entries -> Add to Prducts -> save.
+whichever products has the standard price book those are visible in the products list. 
+
+OpportunityLineItem (Opportunity Product):
+===========================================
+-> It is the junction between Opportunity & Product.
+-> It links Product with Opportunity.
+-> Based on product selected Amount & revenue get generated on the opportunity.
+
+
+Quotes :
+========
+-> The Price of your company product or service. 
+-> By default Quote is not available in the Org.
+To enable 
+ SetUp -> Quote Settings -> Enable Quote.
+
+
+
+Note :  Once product is added on the opportunity then Opportunity Currency can't be changed.
