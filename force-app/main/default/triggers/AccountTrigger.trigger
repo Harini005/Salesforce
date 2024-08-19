@@ -7,5 +7,6 @@ trigger AccountTrigger on Account(before insert, before update, after insert) {
   }
   if (Trigger.isAfter && Trigger.isInsert) {
     AccountTriggerHandler.onAfterInsert();
+    AccountTriggerHandler.createClientOpportunity(Trigger.newMap);
   }
 }

@@ -7,4 +7,31 @@ public with sharing class ContactTriggerHandler {
     List<Contact> contacts = [SELECT Id, AccountId, Account.Name FROM Contact WHERE Id IN :newRecords];
     System.debug(Json.serializePretty(contacts));
   }
+  
+  public static void preventDuplicateContact(){
+    List<Contact> newContacts = (List<Contact>)Trigger.new;
+    Map<Id,Contact> oldMap = (Map<Id,Contact>) Trigger.oldMap;
+    Set<String> recordMatch = new Set<String>();
+    for(Contact record : newContacts){
+      recordMatch.add(record.Email);
+      recordMatch.add(record.Phone);
+    }
+    recordMatch.remove(null);
+    List<Contact> matches = [SELECT Id,Email,Phone from Contact where (Email IN :recordMatch OR Phone IN : recordMatch) AND Id NOT IN :oldMap.keySet()];
+    
+    if(Matches.isEmpty()){
+      return;
+    }
+    Map<String,Contact> contactMatches = new Map<String,Contact>();
+    for(Contact match : matches){
+      contactMatches.put(match.Email , match);
+      contactMatches.put(match.Phone , match);
+    }
+    
+    for(Contact record : newContacts){
+      if(contactMatches.containsKey(record.Email) || contactMatches.containsKey(record.Phone)){
+        record.addError('Duplicate record found. Please change the Values');
+      }
+    }
+  }
 }

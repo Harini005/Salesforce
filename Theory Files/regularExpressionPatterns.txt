@@ -3,7 +3,163 @@ Purpose of Regex :
     Regex is used to find the patterns in the text.
     
 => Square brackets :
-    The easiest regular expressions to understand are those that simply look for a character-to-character match between the regex pattern and the target string, like:
+
+    -> The easiest regular expressions to understand are those that simply look for a character-to-character match between the regex pattern and the target string, like:
+    -> Open-and-close square brackets tell the regex engine to match any one of the characters specified, but only one.
+    -> When you use square brackets, you're telling the regex engine to match on exactly one of the characters contained within the brackets. If the engine finds a c character, then an a character, but the next character isn't r or t, it's not a match. If it finds ca and then either r or t, it stops. It won't continue and try to match more characters, because the square brackets indicate that only one of the contained characters should be searched for. When it finds the ca, then the r in cart, it stops, because it's found a match on the sequence car.
+
     Ex : 
-    String : The cat was cut when it ran under the car. 
-    regex : ca[rt];
+    String : The cat was cut when it ran under the car.
+    regex : ca[rt]
+
+    String : Jim, where Bill had had "had", had had "had had". "Had had" had been correct.
+    regex : [Hh]ad
+
+    string :  A bat, a cat, and a rat walked into a bar...
+    regex : [bcr]at
+
+
+=> escape sequences :
+    -> escape sequence is used to match the special characters in the sentence . Usually regex takes the special characters not as literals.
+    - To find the match of special chacter use blackslach(\). It treats the special characters as listerals.
+    -> Only special characters should be preceded by \ to force a literal match. All other characters are interpreted literally by default. 
+    Ex : 
+
+    String : Find the size of [].
+    regex : [] -> this won't find the literal in the string.
+    crct regex :\[\]
+
+    String :  C:\Users\Tanja\Pictures\Dogs 
+    regex : \\
+    
+    ->  For instance, the regular expression t matches only literal lowercase letter t characters. But the escape sequence \t is totally different. It matches tab characters
+
+    String : ...match this regex `\[\]` with a regex?
+    regex : \\\[\\\]
+
+
+=> the "any" character :
+ 
+    -> It is used to match (nearly) any character, and that's the period / full stop character (.)
+
+    String : I'm sorry, Dave. I'm afraid I can't do that.
+    regex : .
+
+    String : Hi Walmart is my grandson there his name is "\n \r \t".
+    regex : \\.
+
+    String :  War is Peace. Freedom is Slavery. Ignorance is Strength.
+    regex : \.
+
+
+=> character ranges : 
+    -> Put the first and last letters you want to match in the square brackets, with a hyphen in between them.
+    
+    Ex : 
+    String : \\[nrtf] instead \\[a-m]
+    regex : `\n`, `\r`, `\t`, and `\f` are whitespace characters, `\.`, `\\` and `\[` are not.
+    
+    -> If you want to match multiple ranges, just put them back-to-back in the square brackets:
+    -> Other common character  ranges include: A-Z and 0-9.
+
+    EX : 
+    String : `\n`, `\r`, `\t`, and `\f` are whitespace characters, `\.`, `\\` and `\[` are not.
+    regex : \\[a-mg-q]
+
+    Ex : Hexadecimal numbers can contain digits 0-9 as well as letters A-F. When used to specify colours, "hex" codes can be as short as three characters
+    String : 1H8 4E2 8FF 0P1 T8B 776 42B G12
+    regex  : [0-9A-F][0-9A-F][0-9A-F]
+
+
+=> the "not" character (^) : 
+
+    -> The "not" carat ^ allows us to specify characters and character ranges which the regex engine should not match on.
+
+    Ex: 
+    String : The walls in the mall are totally, totally tall.
+    regex : [^aeiou] 
+
+    Ex: 
+    String : day dog hog hay bog bay ray rub
+    regex : [a-z][a-z][^y ] 
+
+    String : 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984
+    regex : 19[78][^3-6]
+
+    String : abc1^23*()
+    regex : [^^]
+
+
+=> Character Class :
+
+class   	characters
+-------     ---------------
+\d	         "digits" [0-9]
+\w	         "word characters" [A-Za-z0-9_]
+\s	         "whitespace" [ \t\r\n\f]
+
+    Ex : 
+    String : `\n`, `\r`, `\t`, and `\f` are whitespace characters, `\.`, `\\` and `\[` are not.
+    regex :  \\\w
+
+    String : __e $12 .x2 foo Bar 3mm 
+    regex : [a-zA-Z_$]\w\w
+
+    String : 113-25=1902 182-82-0192 H23-_3-9982 1I1-O0-E38B
+    regex : \d\d\d-\d\d-\d\d\d\d
+
+
+=> the asterisk * and the plus sign + :
+
+    -> * is used for 0 or more occurances
+    -> + is used for 1 or more occurances
+
+    Ex : 
+    String : 3 plus 3 is six but 4 plus three is 7
+    regex : [a-zA-z]+
+
+    Ex :
+    String : 11TB 13 14.4MB 22HB 9.9GB TB 0KB
+    regex : \d\.*\d+[KMGT]B or [0-9.]*\d+[KMGT]B
+
+=> the "optional" question mark ? : 
+    -> The "optional" question mark ? is a modifier that matches zero or one of the preceding characters, but no more.
+
+    Ex: 
+    string : 1..3KB 5...GB ..6TB
+    regex : \d\.?[KGT]B
+
+    Ex : 
+    String : 13L long 2l 19 L lL 0
+    regex : \d+[lL]?
+
+
+=> Or '|' : 
+    -> The "or" pipe | allows us to specify multiple possible match sequences in a regular expression. Similar to how [] let us specify alternate single characters, with the "or" pipe |, we can specify alternate multi-character expressions.
+
+    Ex : 
+    string:  Obviously, a dog is a better pet than a cat.
+    regex : dog|cat
+
+    Ex :
+    String : 42L 12 x 3.4f 6l 3.3 0F L F .2F 0.
+    regex : \d*\.\d+[fF]?|\d+\.\d*[fF]?|\d+[lLfF]?
+
+
+=>  parentheses () for capturing groups :
+    -> By placing part of a regular expression inside round brackets or parentheses, you can group that part of the regular expression together. This allows you to apply a quantifier to the entire group or to restrict alternation to part of the regex.
+    -> Only parentheses can be used for grouping. Square brackets define a character class, and curly braces are used by a quantifier with specific limits.
+
+    Ex: 
+    String : The current President of Bolivia is Evo Morales.
+    regex : ([A-Z]|[a-z])
+
+
+=> curly braces {} for defined repetition :
+    {X}   // match exactly X times
+    {X,}  // match >= X times
+    {X,Y} // match >= X and <= Y times
+
+    EX : 
+    String : 113-25=1902 182-82-0192 H23-_3-9982 1I1-O0-E38B
+    regex : \d{3}-\d{2}-\d{4}

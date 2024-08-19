@@ -1,0 +1,19 @@
+Lead            : Lead is an enquiry from prospective customer.
+Account         : Account is basically a customer, Company.
+Contact         : Contact is a person within Account/company.
+Opportunity     : Opportunity is a deal that we are prospecting to our customer.
+Quote & QuoteLineItem : Quotation
+Product         : Product Master; SKU Master
+PriceBook       : priceBook 
+Account Team    : Account Team like Account Manager, Demo Engineer etc.
+Opportunity Team : Account Manager, Demo Manager , Installation Engineer etc.
+Opportunity Product : Product which are offering to our customers
+Opportunity split : share percentage between each of opportunity team 
+
+
+
+
+=> one account can have multiple opportunities.
+=> one Opportunity can have multiple quotes,Opportunity products.
+=> Under quote , qlis will present.
+=> Account has Account Teams

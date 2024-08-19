@@ -1,0 +1,74 @@
+Campaign Management :
+========================
+
+=> A container for related marketing efforts
+=> A Campaign record helps you to group marketing assets and interested customers together.
+=> A campaign can track
+    -> Advertisment details , emails
+    -> Leads, Contact and their responses
+=> marketers use campaigns to analyze lead generation , see pipeline and number of closed deals.
+=> you can group related campaigns and create campaign hierarchies.
+
+
+SetUp Campaign Management :
+============================
+=> Enable User to access Campaign.
+=> Customize Campaign Type
+=> Campaign Member Statues
+=> Allow Users to create Campaign hierarchies.
+
+1. Enable User to Access Campaign:
+    -> Check Marketing user checkbox on the user record. Then only User will able to create marketing record. else new button will be not visible. 
+    -> Assign a permission set having create campaign Permissions , if user's profile doesn't already have.
+    -> Now user will be able to access Campaign Object.
+
+2. Customize Campaign Type :
+    Type is a picklist in the campaign. can add/change the picklist values according to the requirement.
+
+3. Allow users to create campaign hierarchies :
+    -> Verify below things for Parent Campaign fields available in Campaign Object :
+        -> Placed on Campaign Page Layout
+        -> Field level security is enabled.
+        -> To allow users to see Parent and child campaigns on a campaign record, add the Campaign hierarchie related list to a campaign Page layout.
+
+
+4.Campaign Member Statues :
+
+campaign Member links campaign with Lead or campaign with contact.
+campaign memebr fields:
+-> Status field:
+    => For email campaigns, can use Statuses like "Sent" , "Responded" ,"Purchased" and "Did Not Purchased".
+    => For Product demos , can use statuses like  "Invited"  "Accepted" , "Declined" and "Attended".
+-> Add members(Lead,Contact) to the campaign.
+-> Accounts as campaign members.
+-> work with campaign members.
+
+
+Working with campaign :
+========================
+-> create and edit a campaign.
+-> clone a campaign
+-> create a campaign hierarchy.
+-> sharing campaign
+-> Track Campaign History. -> Set the field history tracking.-> PageLayout -> relatedList -> place Field History -> save.
+
+To show the fields in the hierarchy related tab -> setup -> object -> Hierarchy Columns -> select fields -> save.
+
+How to add Campaign Memebers to the campaign:
+==============================================
+
+Campaign has the related list campaign members.
+can add leads and contacts to it 
+can do Bulk imports to the campagain member -> In related list have a button -> import Excel sheet and save.
+
+In lead list view can add the selected lead to the campaign by clicking the add to campaign button.
+same for the contacts. In list view Add to Campaign is avalable.
+
+Accounts also can be a campaign member.
+
+To enable account as campaign member:
+=====================================
+set up -> Account as campaign Member -> select Enable -> save
+after saving refresh the campaign related list page , can see the Add Accounts in the campaign member related list.
+for account can't have the add to campaign on the Account list view.
+

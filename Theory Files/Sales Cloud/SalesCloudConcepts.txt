@@ -1,0 +1,113 @@
+difference between sales and salesConsole :
+============================================
+
+it ony varies the navigation type.
+sales app has the standard navigation. Salesconsole app has the console navigation.
+
+How to choose Navigation Style :
+=================================
+
+while creating the application there will an option to select the Navigation style.
+can't change the navigation style once app is created.
+for the same app can have 2 navigation styles as sales and salesConsole app.
+
+
+Data Model : https://architect.salesforce.com/diagrams#framework?Diagram+Type=Design+Pattern
+https://architect.salesforce.com/assets/images/data-models/sales-cloud-overview-data-model.png
+
+Account :
+=========
+1.Business Account
+2.Person Account.
+
+Account & Contact Management : 
+===============================
+=> Account and Contact both are standard Salesforce Objects.
+=> Account Objects store the information about the companies with which an organization is doing business.
+=> Contact Object stores information about people those are working with companies whose information is stored in Account.
+
+In Salesforce, the Ownership field on an Account object is typically used to track the ownership status of the account within the organization. It provides information about who within the organization is responsible for managing the account.
+The Ownership field on the Account object in Salesforce typically has a standard set of picklist values. These values help to classify the ownership status of the account. The standard options available are:
+
+Public: Indicates that the account is publicly traded or owned by a publicly listed company.
+
+Private: Indicates that the account is privately held and not publicly traded.
+
+Subsidiary: Used when the account is a subsidiary of a larger parent company.
+
+Other: A catch-all option for ownership types that don't fall into the other categories.
+
+Unknown: Used when the ownership status of the account is not known.
+
+These are the standard values, but Salesforce administrators can customize the picklist to add, remove, or modify these values based on the specific needs of their organization.
+
+
+Account & Contact RelationShip :
+=================================
+
+=> Relationship between companies(accounts) and the people who work  at them (Contacts).
+=> one person can be associated with multiple companies.
+    -> contacts to multiple Accounts.
+
+=> Junction object : Account Contact RelationShip.
+
+
+person Account :
+===============
+
+=> Solo contractor or an individual consumer.
+=> can use special type i.e. person Account.
+=> person account won't have their own contact.
+Note : once person Account enabled in the org. 2 record types of aaccount will be created. 
+Once Person Account enabled can't be disabled.
+
+considerations :
+-----------------
+=>Person Accounts count against both account and contact storage, because each person account consists of one account and one contact.
+=>Person Accounts can't be included in account hierarchies, contact hierarchies, or have direct relationships with other accounts or contacts. However, you can use Contacts to Multiple Accounts to create indirect relationships between a person account and another person account, business account, or contact.
+=>Creating or editing a person account triggers account workflow rules.
+=>Contact fields from person accounts will continue to be exposed on account list views and reports even if your org stops using person accounts.
+
+1. Business account
+2.Person Account
+
+Enable Person Account :
+set up -> sales -> Accounts -> person Accounts
+requiremnts :
+1. org impact acknowledgment :
+2.Create Accounts Record Type :
+3.Set Read Permission :
+4.set organiztion-wide sharing set to : controlled By Parent.
+
+once person Account is enabled give the permission for the recordType on profile or permissionset level. By default it won't get the permission.
+Once Person Account is activated in the org. Standard Person Account Object will get created in the Organization. 
+In standard Person Account Object , can't create fields. If any new fields wants to be created that needs to be done on Account or contact.
+fields that are created as part of Person Account object is avilable on Account & Contact with __pc suffix to the field Api Name.
+
+
+
+Account Teams & Team Member roles :
+=====================================
+Enable Account Teams from Set up
+
+Set up -> Account Teams -> Enable Account Teams 
+Account Teams related list will gets added to the Account PageLayouts.
+can associate user of the org with role in Account Teams .
+
+can add Default Teams from the org. It will add some users with roles in the org to that Account
+
+How to configure Default Teams :
+==================================
+
+User -> Settings -> Advanced User settings -> Default Teams -> configure
+This configuration can be done only once the Account Teams are Enabled.
+
+Associate Contacts to Multil Accounts : 
+========================================
+setup -> Account settings -> Activate Multiple Accounts to the COntact.
+once enabled  a new Object AccountContactRelationship object will gets created.
+Object Manager -> Contacts -> PageLayout -> Add Account Contact RelationShip Related List to the pagelayout -> click save 
+
+Two Types of Contact :
+1.Direct Contact : A contact that is directly in a relationship/Linked with Account
+2.Indirect Contact :  A contact that is linked through AccountContact Relationship Junction object.
