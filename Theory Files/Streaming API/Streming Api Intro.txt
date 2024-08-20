@@ -1,0 +1,36 @@
+Streaming Api :
+=================
+-> Streaming events are instant notification messages that one system(the publisher) sends to another(the subscriber)
+                                           -----------------
+                                           | Streaming API |
+                                           -----------------
+                                                    |
+                    -----------------------------------------------------------------------------
+                    |                                                                           |
+                    |                                                                           |                
+                ----------                                                                   -----------         
+                | Legacy |                                                                   | Current |
+                ----------                                                                   ------------
+                 |-> Generic                                                                     |-> Platform Events 
+                 |-> Push Topic                                                                  |-> Change Data Capture    
+                 
+        Note : Salesforce don't recommend using legacy.
+
+
+Streamin API vs Rest API :
+============================
+
+=> using a Rest API is sometimes compared to a conversation, while making requests with streaming APIs is more like watching a movie.
+=> STreaming APIs are totally the opposite of REST APIs. They are simple a long-running requests, left open, So data can be pushed into it.
+=> one example of Streaming API can be those used by social media platforms (e.g., twitter & facebook) which provides user with real time data by updating information automatically.
+
+
+| Rest API                                                     | Streaming API                                                                             |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| 1.Client-server architecture based on requests and responses | 1. Persist connection with the streaming server based on long-running requests and events |
+| 2.connections is closed after response is received.          | 2.Connection is not closed until it is closed by server or cient.                         |
+| 3.Stateless (Can be Cacheable)                               | 3. Stateful.                                                                              |
+| 4.flexible , suitable for many applications                  | 4.Specific use cases.                                                                     |
+| 5.Various response format.                                   | 5.limited response format                                                                 |
+
+
