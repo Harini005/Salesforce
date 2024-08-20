@@ -163,3 +163,31 @@ class   	characters
     EX : 
     String : 113-25=1902 182-82-0192 H23-_3-9982 1I1-O0-E38B
     regex : \d{3}-\d{2}-\d{4}
+
+=> \b, the zero-width boundary character :
+    -> \b is a zero-width escape sequence which matches, funnily enough, the boundary of a word. Remember that when we say "word", we mean any sequence of characters in the class \w, aka. [a-zA-Z0-9_].
+    -> Matching on a word boundary means that the character immediately before or immediately after the \b sequence must be a non-word character. But we don't actually include that character in our captured string.
+
+    Ex: 
+    String : Ve still vant ze money, Lebowski.
+    regex : \b[^ ]+\b
+
+    String : var varx _var (var j) barvarcar *var var-> {var}
+    regex : \bvar\b
+
+
+
+=> the "start of line" carat ^ and "end of line" dollar sign $ : 
+    ->Two of the more popular ones include the "start of line" carat ^ and the "end of line" dollar sign $. Including one of these in your regular expressions means that the given match must appear at the beginning or end of a line within the string you're trying to match on:
+
+    Ex :
+    string:  start end start end start end start end
+    regex: ^start|end$
+
+
+=> non-capturing groups (?:) : 
+    ->A non-capturing group does exactly what it sounds like -- it allows you to group characters, and use them in your regular expressions, but it doesn't capture them within a numbered group:
+
+    Ex : 
+    String : I only want "the text inside these quotes".
+    regex : (?:")([^"]+)(?:")
