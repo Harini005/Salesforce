@@ -104,4 +104,28 @@ public with sharing class AccountTriggerHandler {
     email.setToAddresses(new List<String>{OwnerEmail});
     return email;
   }
+  
+  public static void setSalesRep(){
+    List<Account> accounts = (List<Account>)Trigger.new;
+    Map<Id,Account> newMap = (Map<Id,Account>) Trigger.newMap;
+    Map<Id,Account> oldMap = (Map<Id,Account>) Trigger.oldMap;
+    Set<Id> ownerIds = new Set<Id>();
+    for(Account record : accounts){
+      ownerIds.add(record.ownerId);
+    }
+    if(ownerIds.isEmpty()){
+      return;
+    }
+    Map<Id,User> owners = new Map<Id,User>([Select Id,Name from User Where Id IN :ownerIds]);
+    for(Account account : accounts){
+      if(String.isBlank(account.Sales_Rep__c)){
+        account.Sales_Rep__c = owners.get(account.OwnerId).Name;
+        continue;
+      }
+      if(newMap?.containsKey(account.Id) && newMap.get(account.Id).OwnerId != oldMap.get(account.Id).OwnerId){
+        account.Sales_Rep__c = owners.get(account.OwnerId).Name;
+      }
+      
+    }
+  }
 }
