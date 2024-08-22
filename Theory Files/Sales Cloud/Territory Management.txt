@@ -1,0 +1,41 @@
+what is Territory Management :
+================================
+
+In Salesforce with OWD as private model, we used to share the record using sharing role,role , role hierarchy, manual sharing , apex sharing.
+
+Territory management is also used to share the record.
+Account sharing model which grants access to accounts based on the characteristics(field Values) of account.
+Territory management also helps to shares Account, Contact, Opportunity and case records with each other.
+this happens only when OWD is set to private for Account.
+
+
+=> Territory Management is an account sharing system that grants access to accounts based on the characteristics of the accounts. It enables the company to structure salesforce data and users the same way as we structure salesterritories.
+=> With territory Management businesses are able to increase overall revenue by ensuring that all market segments are covered.
+=> with sales territories, it's easy to keep track of which reps are assigned to which accounts and opportunities. If you manage territories effectively , you'r allocating resources efficiently, so you'r more likely to maximize sales and profts.
+=> Territory Management encourages healthy competition within team.EX: Which territory will meet its quote first this quarter : NorthEast or Southeast or APAC or EMEA or AMER
+
+
+With Territory Management :
+-> Salesforce admins can set up and test territory models before implementing them.
+-> It's easy to make assignements between territories , accounts and opportunities.
+-> Reports helps teams organize for optimal coverage and assesess territory effectiveness.
+-> If you use Collabrative forecasts, you can forecast by hierarchy.
+
+Terms in Territory Management:
+================================
+Territory - group of Accounts and sales Reps who works with those accounts.
+Territory Type - Helps you group territories according to the common denominator such as named accounts versus geographic territories. Every territory you create has a territory type.
+Territory type priority  - Helps you choose the appropriate territory type for territories you can create or edit.
+Territory Model - Represents a complete territory management system for company. Modeling lets you create and preview multiple territory structures and different account and user assignments before you activate the model that works best.
+Territory Hierarchy - shows a model's territory structure and serves as its main interaction point. you start from the hierarchy to create , edit and delete territories.
+Territory model state - Indicates whether a territory is in planning stage, in active use ,or archived. You can have only one active territory model at a time , but you can create and maintain multiple models in planning or archived state to use for aditional modeling or reference.
+
+How to setup Territory management :
+===================================
+seup -> Territory settings -> Enable Territory settigs.
+Refresh the org once.
+set up -> Territory Type -> create Territory Type.
+setup -> Territory model -> create model -> view Hierarchy -> create territory -> add rules -> check the active check box -> save.
+
+Account -> PageLayout -> add territory in related list 
+layout properties -> check the check boxes related to the territory management -> save.
