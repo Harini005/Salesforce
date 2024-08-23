@@ -13,5 +13,6 @@ trigger AccountTrigger on Account(before insert, before update, after insert, af
   }
   if(Trigger.isAfter && Trigger.isUpdate){
     AccountTriggerHandler.sendEmailToOwner();
+    //AccountTriggerHandler.updateOwnerOnContact();
   }
 }

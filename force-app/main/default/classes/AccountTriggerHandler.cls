@@ -128,4 +128,28 @@ public with sharing class AccountTriggerHandler {
       
     }
   }
+  
+  public static void updateOwnerOnContact(){
+    Map<Id,Account> newMap = (Map<Id,Account>)Trigger.newMap;
+    Map<Id,Account> oldMap = (Map<Id,Account>)Trigger.oldMap;
+    Map<Id,Id> accountIdToOwnerId = new Map<Id,Id>();
+    for(Account acc : newMap.values()){
+      if(oldMap.get(acc.Id).OwnerId != acc.OwnerId){
+        accountIdToOwnerId.put(acc.Id , acc.ownerId);
+      }
+    }
+    if(accountIdToOwnerId.isEmpty()){
+      return;
+    }
+    List<Contact> contacts = [SELECT Id,AccountId,OwnerId from Contact Where AccountId IN :accountIdToOwnerId.keySet()];
+    List<Contact> contactsToUpdate = new List<Contact>();
+    for(Contact contact : contacts){
+      contact.OwnerId = accountIdToOwnerId.get(contact.AccountId);
+      contactsToUpdate.add(contact);
+    }
+    if(contactsToUpdate.isEmpty()){
+      return;
+    }
+    update contactsToUpdate;
+  }
 }
