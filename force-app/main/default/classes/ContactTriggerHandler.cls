@@ -4,8 +4,22 @@
  */
 public with sharing class ContactTriggerHandler {
   public static void beforeInsert(List<Contact> newRecords) {
-    List<Contact> contacts = [SELECT Id, AccountId, Account.Name FROM Contact WHERE Id IN :newRecords];
-    System.debug(Json.serializePretty(contacts));
+    validatePrimaryContact(Trigger.new);
+  }
+  
+  public static void onBeforeUpdate(){
+    Map<Id,Contact> newMap = (Map<Id,Contact>) Trigger.newMap;
+    Map<Id,Contact> oldMap = (Map<Id,Contact>) Trigger.oldMap;
+    List<Contact> records = new List<Contact>();
+    for(Contact record : newMap.values()){
+      if(oldMap.get(record.Id).Primary_Contact__c != record.Primary_Contact__c){
+        records.add(record);
+      }
+    }
+    if(records.isEmpty()){
+      return;
+    }
+    validatePrimaryContact(records);
   }
   
   public static void preventDuplicateContact(){
@@ -68,4 +82,29 @@ public with sharing class ContactTriggerHandler {
     }
     update accountsToUpdate;
   }
+  
+  public static void validatePrimaryContact(List<Contact> records){
+    List<Id> accountIds = new List<Id>();
+    for(Contact record : records){
+      if(String.isNotBlank(record.AccountId) ){
+        accountIds.add(record.AccountId);
+      }
+    }
+    if(accountIds.isEmpty()){
+      return;
+    }
+    Map<Id,Account> accounts = new Map<Id,Account>([SELECT Id,(SELECT Id from Contacts where Primary_Contact__c = true) from Account where Id IN :accountIds]);
+    for(Contact contact : records){
+      if(accounts.containsKey(contact.AccountId)){
+        if(accounts.get(contact.AccountId).Contacts.isEmpty()){
+          contact.Primary_Contact__c = true;
+          continue;
+        }
+        if(contact.Primary_Contact__c){
+          contact.addError('Primary Contact exsists for the associated Account.');
+        }
+      }
+    }
+  }
+  
 }
