@@ -1,0 +1,20 @@
+Salesforce is a CRM on cloud.
+it is a n enterprise cloud company.
+
+Master Table  : The data which we interact frequently but won't change it frequntly.
+Ex : Bank Account.
+-> Customer master : Any interested person is Customer.
+    => customer master divided into 2 table : Account & contact.
+    Account : Company,Organization,Society, Person , Business, group.
+    In PageLayout : Account Information , Address Information , Description Information , Additional Information.
+    can an organiztion have multiple accounts ? Yes 
+    contact : Any individual person 
+    Ex : Me , you etc....
+    In PageLayout : ContactInformation , Address Information , Additional Information.
+    Account & contact can have hierarchies.
+
+    contact -> Contact ----> 1:many
+    Account -> Contact -----> 1:many
+    Account -> Account ------> 1:many
+    contact : Account ----> 1:1
+-> Product Master : product

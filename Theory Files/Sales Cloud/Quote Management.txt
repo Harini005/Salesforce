@@ -1,0 +1,37 @@
+-> Enable Quote
+-> SetUp -> Quote Settings -> Enable -> save.
+-> Quote Name is auto Generated
+
+Quote Cycle :
+=============
+=> Stages followed during the Quotation Process.
+=> Default Quotation stage in Salesforce CRM (Which are provided by Salesforce)
+Stages :
+1.Draft             - just started created
+2.Needs Review      - Someone needs to Review
+3.In Review         - Reviewing
+4.Approved          - Approved by hiring manager
+5.Rejected          - Rejected by manager
+6.Presented         - presented to customer
+7.Accepted          - Customer accepted
+8.Declined          - Customer Declined
+
+create PDf - It's a quick action used to generate pdf of the Quote details . Which can be later give to the customer.
+By Default standard Template (Salesforce Provided) is used.
+To create new Quote PDF - Setup -> Quote Templates -> new -> select fields which all are want to be showed in document -> save -> activate it.
+If there are 2 templated it will ask which one to select in a dropdown when clicked on create PDF.
+
+Syncing : 
+Till now whatever changes made to the quoteLineItems it won't reflect on the Opportunity & changes made on Opportunity won't reflect on the Quote.
+To make both ofthem to be in Sync. Salesforce provides a quick action button where we can start syncing Quote & Opportunity.
+so that the changes made on the quote reflects on the opportunity and changes made on the Opportunity reflects on the Quote.
+if we want to stop sync there is a quick action provided by salesforce to stp syncing. 
+At a time only one quote will be on Sync or primary quote to an opportunity. If the Opportunity has multiple Quotes.4
+
+Discount on Quote :
+====================
+-> Discount applies to the each product.
+Discount field on the quote is read-only.
+as discount applies to the ecah product . we need to upadate discount on each QuoteLineItem(i.e., product).
+the product discount rolls up on the Quote.
+discount alway's will be in %. 
