@@ -120,7 +120,7 @@ public class EventDemo{
     }
 }
 
-public without sharing class PE_ResultHandler implemets EventBus.EventPublishSuccessHandler , EventBus.EventPublishFailureCallback{
+public without sharing class PE_ResultHandler implemets EventBus.EventPublishSuccessCallback , EventBus.EventPublishFailureCallback{
     public void onSuccess(EventBus.SuccessResult result){
         List<String> eventUUIDS = result.getEventUUIds();
         ============= SOME CODE =========================
