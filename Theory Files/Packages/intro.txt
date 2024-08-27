@@ -1,0 +1,21 @@
+Packages in Salesforce :
+==========================
+-> A package is a bundler/collection/container for list of components or related application.
+-> we can distribute these package to other salesforce organization and users.
+
+Types of package in salesforce :
+1. Unmanaged Package.
+2. Managed Package.
+
+UnManaged Package :
+====================
+-> UnManaged package is used to distribute open source applications to provide developers with the basic functionality.
+-> We can edit Unmanaged pakage components after installing it in a salesforce organization.
+-> The developer who created unManaged package has no control on installed components, can't edit & can't upgrade.
+
+Managed Package :
+=================
+-> Managed Package is used to distribute and sell application to customers.
+-> By using the App exchange developers can sell and manage user based licenses to the managed package application.
+-> Manage packages are fully upgradable.
+-> To ensure seamless upgrade, certain destructive changes like , removing objects or fields, can not be performed.
