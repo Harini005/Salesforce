@@ -1,0 +1,28 @@
+Marketing :
+==============
+
+Any activited that happens before the sales is marketing.
+post sales is service.
+
+Properties of Marketing :
+============================
+=> Branding Promotion - Highlighting a company's personality, values and mission.
+=> Product awarness - Eductaing Customer about the product.
+=> Market penetration - To get inside the Market
+=> Customer acquisition - Bring new Customers.
+=> Customer retention - keep the confidence of the existing customer.
+
+A brand once built lasts forever in the minds of the people, Whereas product is replaced with a new product with new and advanced features.
+
+Marketing cloud in salesforce :
+================================
+
+Managing Marketing activities in salesforce is called Marketing cloud.
+Marketing cloud in salesforce contains 2 objects :
+    -> campaign - any targeted marketing efforts is called campaign.
+        => direct Campaign - Campaign were Prospect are directly involved is called direct campaign. Here we will have the numbers of the people campaign reached
+            Ex : Demo Class, Door to Door Survey , Sample Distrbution.
+        => Indirect Campaign - campaign where prospects are not involved directly are called indirect campaign. here the numbers will be the assumptions.
+            Ex: TV advs , Paper advs , Theater advs , Banner Posters.
+
+    -> Lead - 

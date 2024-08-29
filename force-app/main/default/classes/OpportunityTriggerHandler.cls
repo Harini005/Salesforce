@@ -86,4 +86,15 @@ public with sharing class OpportunityTriggerHandler {
     rollAmountOnAccount(opportunities);
   }
   
+  public static void validateStageType(){
+    Map<Id,Opportunity> newMap = (Map<Id,Opportunity>) Trigger.newMap;
+    Map<Id,Opportunity> oldMap = (Map<Id,Opportunity>) Trigger.oldMap;
+    for(Opportunity record : newMap.values()){
+      Opportunity oldRecord = oldMap.get(record.Id);
+      if((record.StageName == 'Closed Won' && record.Opportunity_Type__c == 'High' && oldRecord.CloseDate != record.CloseDate)){
+        record.addError('CloseDate Cannot be edited');
+      }
+    }
+  }
+  
 }

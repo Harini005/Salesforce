@@ -1,9 +1,9 @@
 trigger OpportunityTrigger on Opportunity(before insert, before update, after insert , after delete , after update , after undelete) {
   if (Trigger.isBefore && Trigger.isInsert) {
-    //OpportunityTriggerHandler.onBeforeInsert();
   }
   if (Trigger.isBefore && Trigger.isUpdate) {
-    //OpportunityTriggerHandler.onBeforeUpdate();
+    OpportunityTriggerHandler.validateStageType();
+    
   }
   
   //Roll Up Amount on Opportunity and Update it on related Account.

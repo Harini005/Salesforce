@@ -107,4 +107,16 @@ public with sharing class ContactTriggerHandler {
     }
   }
   
+  public static void createContactRelationship(){
+    Map<Id,Contact> newMap = (Map<Id,Contact>) Trigger.newMap;
+    Map<Id,Contact> oldMap = (Map<Id,Contact>) Trigger.oldMap ?? new Map<Id,Contact>();
+    List<Contact_RelationShip__c> contactRelationShips = new List<Contact_RelationShip__c>();
+    for(Contact record : newMap.values()){
+      if((!oldMap.isEmpty() && record.Contact_RelationShip__C&& oldMap.get(record.Id).Contact_RelationShip__c != record.Contact_RelationShip__c) || record.contact_RelationShip__C){
+        contactRelationShips.add(new Contact_RelationShip__C(Contact__c = record.Id));
+      }
+    }
+    insert contactRelationShips;
+  }
+  
 }
