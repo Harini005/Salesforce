@@ -152,4 +152,19 @@ public with sharing class AccountTriggerHandler {
     }
     update contactsToUpdate;
   }
+  
+  public static void updateContactOwner(){
+    Map<Id,Account> oldMap = (Map<Id,Account>) Trigger.oldMap;
+    Map<Id,Account> newMap = (Map<Id,Account>) Trigger.newMap;
+    List<Contact> contacts = new List<Contact>();
+    List<Account> accountContacts = [SELECT Id,OwnerId ,(SELECT Id,ownerId from Contacts) from Account where Id IN :newMap.values()];
+    for(Account record : accountContacts){
+      if(oldMap.get(record.Id).OwnerId != record.OwnerId){
+        for(Contact con : record.Contacts){
+          contacts.add(new contact(Id=con.Id , OwnerId =  oldMap.get(record.Id).ownerId ));
+        }
+      }
+    }
+    update contacts;
+  }
 }
