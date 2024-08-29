@@ -10,6 +10,7 @@ trigger ContactTrigger on Contact(before insert , before update , after insert ,
   if(Trigger.isAfter){
     if(Trigger.isInsert){
       ContactTriggerHandler.updateTotalContactonAccount(Trigger.new);
+      ContactTriggerHandler.createContactRelationship();
     }
     if(Trigger.isDelete){
       ContactTriggerHandler.updateTotalContactonAccount(Trigger.old);
@@ -19,6 +20,7 @@ trigger ContactTrigger on Contact(before insert , before update , after insert ,
     }
     if(Trigger.isUpdate){
       ContactTriggerHandler.onAfterUpdate();
+      ContactTriggerHandler.createContactRelationship();
     }
   }
 }
