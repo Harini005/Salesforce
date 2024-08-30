@@ -1,0 +1,23 @@
+Source Org (Identity Provier Org) :
+
+1. Enable Identity Provider
+2. Create a new Self signed certificate in the same Provider page
+3. retrun to the home page and Refresh
+4. Search for Identity Provider in Quick find
+5. Click on the newly created Identity Provider
+6. Download the Certificate and metadata files.
+
+Target Org (Service Provider Org):
+    Quick find -> Single Sign on settings -> Edit -> Enable Single Sign on -> New from metadata -> upload the metadata downloaded file from Identity Provider
+    some fields will get auto populated -> save .
+
+    **can create SSO in 3 ways -> New/New from metadata/New from metadata URL
+
+Source Org (Identity Provier Org) : 
+1.create a connected App
+2.Go To SAML Section
+3.Enable SAML 
+4.Fill all the details -> Don't forget the Start URL.
+   If Start URL filled that connected app will be displayed in App Launcher
+
+
